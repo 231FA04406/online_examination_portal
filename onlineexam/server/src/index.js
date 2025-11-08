@@ -15,8 +15,16 @@ import crypto from 'crypto'
 dotenv.config()
 
 const app = express()
+app.get('/', (req, res) => {
+  res.json({ ok: true, message: 'OnlineExam API is running!' })
+})
+
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173', credentials: true }))
 app.use(express.json({ limit: '1mb' }))
+
+app.get('/', (req, res) => {
+  res.json({ ok: true, message: 'OnlineExam API is running!' })
+})
 
 app.get('/api/health', (req, res) => res.json({ ok: true }))
 app.get('/api', (req, res) => res.json({ ok: true, name: 'OnlineExam API', version: '0.1.0' }))
