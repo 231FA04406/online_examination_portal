@@ -76,6 +76,15 @@ async function start() {
       console.log('Mongo connected (in-memory)');
     }
 
+    const clientOrigin = (process.env.CLIENT_ORIGIN || 'http://localhost:5173').trim();
+
+app.use(
+  cors({
+    origin: clientOrigin,
+    credentials: true,
+  })
+);
+
     // HTTP + Socket.io
     const server = http.createServer(app);
     const io = new SocketIOServer(server, {
